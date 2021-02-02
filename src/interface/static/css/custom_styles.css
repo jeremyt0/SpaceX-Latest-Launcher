@@ -1,0 +1,30 @@
+
+html, body {
+    height: 100%;
+    font-family: 'monaco';
+}
+
+#main-wrapper {
+    height: 100%;
+    padding-top: 80px;
+    padding-bottom: 80px;
+    margin-top: -80px;
+    margin-bottom: -80px;
+}
+
+#main {
+    height: 100%;
+}
+
+header {
+    height: 80px;
+}
+
+footer {
+    height: 80px;
+}
+
+/* Carousel */
+.carousel-width-set{
+    width: 99% !important;
+}

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% include 'head.html' %}
+
+    <title>Homepage</title>
+</head>
+<body>
+{% include 'header.html' %}
+
+<div class="d-flex flex-column">
+    <!-- Latest Launch information -->
+    <div class="d-flex flex-column m-3">
+        
+        <!-- Each launch info -->
+        <div class="d-flex row justify-content-center">
+            <h1 class="d-flex ">
+            {% if 'name' in latest_launch %}
+                {{ latest_launch['name'] }}
+            {% else %}
+                Name of latest launch
+            {% endif %}
+            </h1>
+            {% if 'logo' in latest_launch %}
+                <img 
+                src="/serve_image/{{ latest_launch['logo'] }}"
+                class="rounded d-block"
+                alt="Logo of latest launch"
+                style="height: 60px; width: 60px;"/>
+            {% endif %}
+        </div>
+            
+        <h5 class="d-flex justify-content-center">
+        {% if 'date' in latest_launch %}
+            {{ latest_launch['date'] }}
+        {% else %}
+            No date specified
+        {% endif %}
+        </h5>
+            
+        <h5 class="d-flex justify-content-center mw-75">
+        {% if 'details' in latest_launch %}
+            {{ latest_launch['details'] }}
+        {% else %}
+            The latest SpaceX launch!
+        {% endif %}
+        </h5>
+
+    </div>
+
+    <!-- Content - Ships -->
+
+    <!-- Carousel -->
+    <div class="d-flex flex-column m-3">
+        <h5 class="d-flex justify-content-center">Ships</h5>
+        <div id="carouselExampleControls" class="d-flex flex-column carousel slide carousel-width-set" data-ride="carousel">
+            
+            <div class="carousel-inner ">
+
+                {% for ship in ships %}
+
+                {% if loop.first %}
+                <div class="carousel-item carousel-width-set active">    
+                {% else %}
+                <div class="carousel-item carousel-width-set">                    
+                {% endif %}
+                
+
+                    <div class="card m-3 mh-50">
+                        <h5 class="card-header">{{ ship['name'] }}</h5>
+                        <div class="card-body">
+                            <p>Type of ship: {{ ship['type'] }}</p>
+                            <p>Home port: {{ ship['home_port'] }}</p>
+                            <img 
+                                src="/serve_image/{{ ship['image'] }}"
+                                class="rounded d-block mh-50 mw50"
+                                alt="Image of {{ ship['name'] }}"
+                                style="max-height: 300px; max-width: 80%;"
+                            />
+                        </div>
+            
+                    </div>
+                </div>
+
+                {% endfor %}
+
+
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <img src="{{url_for('static', filename='arrow-left.svg')}}"
+                alt="arrow_left"/>
+            <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+            <!-- <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+                <img src="{{url_for('static', filename='arrow-right.svg')}}"
+                alt="arrow_right"/>
+            <span class="sr-only">Next</span>
+            </a>
+
+        </div>
+    </div>
+
+
+
+</div>
+
+
+
+{% include 'footer.html' %}
+</body>
+</html>
